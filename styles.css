@@ -36,6 +36,7 @@ body {
 
 .modal-content {
     margin: auto;
+    margin-top: 40px;
     display: block;
     max-width: 90%;
     max-height: 90%;
@@ -48,5 +49,12 @@ body {
     color: white;
     font-size: 35px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
     cursor: pointer;
 }

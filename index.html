@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Image Gallery</title>
+    <title>Image Gallery with Modal</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -14,18 +14,16 @@
         <img class="modal-content" id="modalImg">
     </div>
 
-    <!-- <script src="/script.js"></script> -->
-    <script>       
-        fetch('/api/images')
+    <script>
+        fetch('/data.json')
             .then(response => response.json())
             .then(data => {
                 const gallery = document.getElementById('gallery');
-                const images = data.images;
 
-                images.forEach(image => {
+                data.images.forEach(image => {
                     const img = document.createElement('img');
                     img.src = `/images/${image}`;
-                    img.alt = 'Gallery Image';
+                    img.alt = `Image ${image}`;
                     img.classList.add('gallery-item');
                     gallery.appendChild(img);
                 });
@@ -41,38 +39,22 @@
             const galleryItems = document.querySelectorAll(".gallery-item");
 
             galleryItems.forEach(item => {
-                item.onclick = function() {
+                item.onclick = function () {
                     modal.style.display = "block";
                     modalImg.src = this.src;
                 };
             });
 
-            closeBtn.onclick = function() {
+            closeBtn.onclick = function () {
                 modal.style.display = "none";
-            }
+            };
 
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 if (event.target === modal) {
                     modal.style.display = "none";
                 }
-            }
+            };
         }
-    </script>
-    <script>
-        fetch('/data.json')
-            .then(response => response.json())
-            .then(data => {
-                const gallery = document.getElementById('gallery');
-
-                data.images.forEach(image => {
-                    const img = document.createElement('img');
-                    img.src = `/images/${image}`; 
-                    img.alt = `Image ${image}`;
-                    img.classList.add('gallery-item');
-                    gallery.appendChild(img);
-                });
-            })
-            .catch(error => console.error('Error loading images:', error));
     </script>
 </body>
 </html>
