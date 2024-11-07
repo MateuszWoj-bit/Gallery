@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Gallery with Modal</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="gallery" id="gallery"></div>
@@ -26,7 +26,7 @@
 
           data.images.forEach((image, index) => {
             const img = document.createElement('img')
-            img.src = `/images/${image}`
+            img.src = `./images/${image}`
             img.alt = `Image ${image}`
             img.classList.add('gallery-item')
             img.dataset.index = index
