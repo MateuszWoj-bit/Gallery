@@ -17,13 +17,28 @@ app.get('/api/images', (req, res) => {
         }
 
         
-        const images = files.filter(file =>
+        const images = files
+        .filter(file =>
             file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png') || file.endsWith('.gif')
-        );
+        )
+        
+        
+        images.sort((a, b) => {
+            const numA = a.match(/\d+/g)?.map(Number) || [];
+            const numB = b.match(/\d+/g)?.map(Number) || [];
+    
+            for (let i = 0; i < Math.max(numA.length, numB.length); i++) {
+                const diff = (numA[i] || 0) - (numB[i] || 0);
+                if (diff !== 0) return diff;
+            }
+    
+            return a.localeCompare(b);
+        });
+
 
         
         const jsonData = { images };
-
+        
         
         fs.writeFile('data.json', JSON.stringify(jsonData, null, 2), (err) => {
             if (err) {
@@ -40,4 +55,5 @@ app.get('/api/images', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}/api/images`);
 });
