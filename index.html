@@ -64,12 +64,12 @@
 
             prevBtn.onclick = function () {
               currentIndex = (currentIndex - 1 + images.length) % images.length
-              modalImg.src = `/images/${images[currentIndex]}`
+              modalImg.src = `Gallery/images/${images[currentIndex]}`
             }
 
             nextBtn.onclick = function () {
               currentIndex = (currentIndex + 1) % images.length
-              modalImg.src = `/images/${images[currentIndex]}`
+              modalImg.src = `Gallery/images/${images[currentIndex]}`
             }
 
             window.addEventListener('keydown', function (event) {
