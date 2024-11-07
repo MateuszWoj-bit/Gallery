@@ -7,21 +7,18 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <!-- Image Gallery Container -->
     <div class="gallery" id="gallery"></div>
 
-    <!-- Modal Structure -->
     <div class="modal" id="modal">
       <span class="close" id="close">&times;</span>
       <img class="modal-content" id="modalImg" />
-
-      <!-- Previous and Next Buttons -->
+  
       <a class="prev" id="prev">&#10094;</a>
       <a class="next" id="next">&#10095;</a>
     </div>
 
     <script>
-      fetch('/data.json')
+      fetch('./data.json')
         .then((response) => response.json())
         .then((data) => {
           const gallery = document.getElementById('gallery')
