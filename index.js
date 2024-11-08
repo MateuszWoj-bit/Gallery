@@ -24,16 +24,26 @@ app.get('/api/images', (req, res) => {
     )
 
     images.sort((a, b) => {
-      const numA = a.match(/\d+/g)?.map(Number) || []
-      const numB = b.match(/\d+/g)?.map(Number) || []
-
+      const isSimple = (str) => /^[a-zA-Z]*\d+[a-zA-Z]*\.\w+$/.test(str);
+    
+      const aIsSimple = isSimple(a);
+      const bIsSimple = isSimple(b);
+    
+      if (aIsSimple && !bIsSimple) return -1;
+      if (!aIsSimple && bIsSimple) return 1;
+    
+      const numA = a.match(/\d+/g)?.map(Number) || [];
+      const numB = b.match(/\d+/g)?.map(Number) || [];
+    
       for (let i = 0; i < Math.max(numA.length, numB.length); i++) {
-        const diff = (numA[i] || 0) - (numB[i] || 0)
-        if (diff !== 0) return diff
+        const diff = (numA[i] || 0) - (numB[i] || 0);
+        if (diff !== 0) return diff;
       }
+    
+      return a.localeCompare(b);
+    });
 
-      return a.localeCompare(b)
-    })
+    console.table(images)
 
     const jsonData = { images }
 
