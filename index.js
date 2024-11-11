@@ -35,7 +35,7 @@ app.get('/api/images', (req, res) => {
       return a.localeCompare(b)
     })
 
-    console.table(images)
+    // console.table(images)
 
     const jsonData = { images }
 
